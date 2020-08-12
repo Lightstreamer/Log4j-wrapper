@@ -1,0 +1,81 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+	implementation 'log4j:log4j:1.2.17'
+	implementation 'com.lightstreamer:ls-log-adapter-java:1.0.2'
+}
+
+version = '1.0.1'
+
+java {
+ 	sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+    withJavadocJar()
+    withSourcesJar()
+}
+
+javadoc {
+    title "Lightstreamer Log4j wrapper $version API Reference"
+    options.overview 'src/main/javadoc/overview.html'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+        	groupId = 'com.lightstreamer'
+            artifactId = 'log4j-wrapper'
+            
+            from components.java
+
+            pom {
+                name = 'Lightstreamer Log4j Wrapper'
+                description = 'Lightstreamer Log4j Wrapper'
+                url = 'http://www.lightstreamer.com'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                
+                developers {
+                    developer {
+                        name = 'support'
+                        email = 'support@lightstreamer.com'
+                        organization = 'Lightstreamer'
+                        organizationUrl = 'https://www.lightstreamer.com'
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:https://github.com/Lightstreamer/Log4j-wrapper.git"
+                    developerConnection = "scm:git:https://github.com/Lightstreamer/Log4j-wrapper.git"
+                    url = 'https://github.com/Lightstreamer/Log4j-wrapper'
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = version.endsWith('SNAPSHOT') ? 'https://oss.sonatype.org/content/repositories/snapshots' : 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.maven
+}
