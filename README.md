@@ -1,6 +1,6 @@
 # Log4j-wrapper
 
-An implementation of [com.lightstreamer.log.LoggerProvider](https://sdk.lightstreamer.com/ls-log-adapter-java/1.0.2/api/com/lightstreamer/log/LoggerProvider.html) based on Log4j.
+An implementation of [com.lightstreamer.log.LoggerProvider](https://lightstreamer.com/api/ls-log-adapter-java/1.0.2/com/lightstreamer/log/LoggerProvider.html) based on Log4j.
 
 ## Installation
 
